@@ -15,7 +15,7 @@ private:
   std::ostream& print(std::ostream &os) const;
 
 public:
-  StringStackType(const char* value, const ErrorHandler *eh);
+  StringStackType(const char* s, const ErrorHandler *eh);
 
   Type getType() const;
 

@@ -4,11 +4,13 @@
 #include "stringstacktype.h"
 #include "errorhandler.h"
 
+using namespace std;
+
 StringStackType::StringStackType(const char* s, const ErrorHandler *eh) : value(s) {
   this->eh = eh;
 }
 
-const std::string &StringStackType::getValue(void) const {
+const string &StringStackType::getValue(void) const {
   return value;
 }
 
