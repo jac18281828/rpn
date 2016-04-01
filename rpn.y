@@ -16,12 +16,15 @@
 
 %union {
   double value;
+  const char* str;
   int    token;
 }
 
+%token <str>   STRING;
 %token <value> NUMBER;
-%token <token> DROP SWAP CLEAR ACOS ABS;
+%token <token> DROP DEPTH SWAP CLEAR ACOS ABS ALOG;
 %type  <value> exp;
+%type  <str>   lit;
 
 %%
 multi_ops: operation
@@ -33,6 +36,10 @@ exp '\n' {
   machine->push($1);
   machine->print();
 }
+| lit '\n' {
+  machine->push($1);
+  machine->print();
+}
 | cmd '\n' {
   machine->print();
 }
@@ -40,20 +47,22 @@ exp '\n' {
 
 exp:     
 NUMBER
-| exp '+' {  $$ = machine->add($1); }
-| exp '-' {  $$ = machine->sub($1); }
-| exp '*' {  $$ = machine->mul($1); }
-| exp '/' {  $$ = machine->div($1); }
-| '+'     {  $$ = machine->add(); }
-| '-'     {  $$ = machine->sub(); }
-| '*'     {  $$ = machine->mul(); }
-| '/'     {  $$ = machine->div(); }
-| ACOS    {  $$ = machine->acos(); }
-| ABS     {  $$ = machine->abs(); }
+;
+
+lit:
+STRING
 ;
 
 cmd:
-DROP { machine->drop(); }
-| SWAP {  machine->swap();  }
-| CLEAR { machine->clear(); }
+| '+'     { machine->add(); }
+| '-'     { machine->sub(); }
+| '*'     { machine->mul(); }
+| '/'     { machine->div(); }
+| ACOS    { machine->acos(); }
+| ABS     { machine->abs(); }
+| ALOG    { machine->alog(); }
+| DROP    { machine->drop(); }
+| SWAP    { machine->swap(); }
+| CLEAR   { machine->clear(); }
+| DEPTH   { machine->depth(); }
 ;
