@@ -6,7 +6,7 @@
 
 using namespace std;
 
-StringStackType::StringStackType(const char* s, const ErrorHandler *eh) : value(s) {
+StringStackType::StringStackType(const string& s, const ErrorHandler *eh) : value(s) {
   this->eh = eh;
 }
 
@@ -16,6 +16,11 @@ const string &StringStackType::getValue(void) const {
 
 Type StringStackType::getType(void) const {
   return STR;
+}
+
+std::ostream& StringStackType::print(std::ostream &os) const {
+  os << value;
+  return os;
 }
 
 void StringStackType::acosh(void) {

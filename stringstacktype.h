@@ -1,6 +1,7 @@
 #ifndef __STRING_STACK_TYPE_H_
 #define __STRING_STACK_TYPE_H_ 1
 
+#include <string>
 #include <iostream>
 
 #include "stacktype.h"
@@ -15,11 +16,11 @@ private:
   std::ostream& print(std::ostream &os) const;
 
 public:
-  StringStackType(const char* s, const ErrorHandler *eh);
+  StringStackType(const std::string& s, const ErrorHandler *eh);
 
   Type getType() const;
 
-  const std::string &getValue(void) const;
+  virtual const std::string &getValue(void) const;
 
   void acosh(void);
   void acos(void);

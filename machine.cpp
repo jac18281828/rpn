@@ -56,7 +56,6 @@ const StackType* Machine::sub(void) {
   }
 }
 
-
 const StackType* Machine::mul(void) {
   if(rpn->size() > 1) {
     const StackType *r2 = pop();

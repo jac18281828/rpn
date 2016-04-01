@@ -22,8 +22,8 @@ OBJS=	\
 	tokens.o \
 	machine.o \
 	printerrorhandler.o \
-	stringstacktype.o \
 	doublestacktype.o \
+	stringstacktype.o \
 	main.o 
 
 all: rpn
