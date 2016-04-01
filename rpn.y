@@ -32,7 +32,27 @@ multi_ops: operation
 ;
 
 operation: 
-exp '\n' {
+exp '+' '\n' {
+  machine->push($1);
+  machine->add();
+  machine->print();
+}
+| exp '-' '\n' {
+  machine->push($1);
+  machine->sub();
+  machine->print();
+}
+| exp '*' '\n' {
+  machine->push($1);
+  machine->mul();
+  machine->print();
+}
+| exp '/' '\n' {
+  machine->push($1);
+  machine->div();
+  machine->print();
+}
+| exp '\n' {
   machine->push($1);
   machine->print();
 }
