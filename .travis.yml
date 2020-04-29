@@ -1,10 +1,11 @@
 os: linux
-
-branches:
-  only:
-  - master
+dist: bionic
 
 language: c++
+
+install:
+- sudo apt update
+- sudo apt install libfl-dev
 
 script:
 - cmake -H. -Bbuild -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_VERBOSE_MAKEFILE=on "-GUnix Makefiles"

@@ -1,12 +1,15 @@
+#include <cstdlib>
 #include <iostream>
 #include "printerrorhandler.h"
 
-using namespace std;
+using namespace rpn;
 
-void PrintErrorHandler::underflow(void) const {
-  cerr << "underflow." << endl;
+void printerrorhandler::error(std::string const &message) const {
+    std::cerr << "Error: " << message << std::endl;
+    ::abort();
 }
 
-void PrintErrorHandler::badargument(const char ctx[]) const {
-  cerr << "Error " << ctx << ": bad argument." << endl;
+void printerrorhandler::underflow(void) const {
+    std::cerr << "underflow." << std::endl;
 }
+

@@ -1,13 +1,13 @@
-cmake_minimum_required(VERSION 2.8.9)
+cmake_minimum_required(VERSION 3.5)
 
-set(CMAKE_VERBOSE_MAKEFILE on)
+#set(CMAKE_VERBOSE_MAKEFILE on)
 
 set(MAJOR 1)
 set(VERSION ${MAJOR}.0.0)
 
-add_compile_options(-DRPN_VERSION=${VERSION} -Wshadow -Wpointer-arith -Wcast-qual -Wcast-align -Wwrite-strings -fno-common -ansi -pedantic)
+project (rpn LANGUAGES CXX VERSION ${VERSION})
 
-project (rpn)
+add_compile_options(-std=c++17 -DRPN_VERSION=${VERSION})
 
 find_package(FLEX REQUIRED)
 
@@ -17,10 +17,18 @@ FIND_PACKAGE(BISON REQUIRED)
 
 BISON_TARGET(rpn src/rpn.y ${CMAKE_CURRENT_BINARY_DIR}/rpn.cpp)
 
-set(SRC src/doublestacktype.cpp src/machine.cpp src/printerrorhandler.cpp src/stringstacktype.cpp ${FLEX_rpn_OUTPUTS} ${BISON_rpn_OUTPUTS})
+set(SRC src/printerrorhandler.cpp ${FLEX_rpn_OUTPUTS} ${BISON_rpn_OUTPUTS})
 
 add_executable(rpn  ${SRC} src/main.cpp)
 
 target_include_directories(rpn PRIVATE include ${CMAKE_CURRENT_BINARY_DIR})
 
-target_link_libraries(rpn ${FLEX_LIBRARIES} ${BISON_LIBRARIES} -lm)
+target_link_libraries(rpn ${FLEX_LIBRARIES} ${BISON_LIBRARIES} m)
+
+enable_testing()
+
+add_executable(rpntest test/main.cpp test/bioptest.cpp test/uoptest.cpp test/ufuntest.cpp test/machinetest.cpp)
+
+add_test(rpn ${CMAKE_CURRENT_BINARY_DIR}/rpntest)
+
+target_include_directories(rpntest PRIVATE include test)

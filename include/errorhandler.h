@@ -1,13 +1,18 @@
-#ifndef __ERROR_HANDLER_H_
-#define __ERROR_HANDLER_H_ 1
+#pragma once
 
 #include <string>
 
-class ErrorHandler {
-public:
-  virtual void underflow(void) const = 0;
-  
-  virtual void badargument(const char* ctx) const = 0;
-};
+namespace rpn {
 
-#endif
+    class errorhandler {
+    public:
+        
+        virtual void error(std::string const &message) const = 0;
+        
+        virtual void underflow(void) const = 0;
+
+    };
+    
+}
+
+

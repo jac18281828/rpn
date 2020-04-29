@@ -1,13 +1,16 @@
-#ifndef __PRINT_ERROR_HANDLER_H_
-#define __PRINT_ERROR_HANDLER_H_ 1
+#pragma once
+
+#include <string>
 
 #include "errorhandler.h"
 
-class PrintErrorHandler : public ErrorHandler {
-public:
-  void underflow(void) const;
+namespace rpn {
+    class printerrorhandler : public errorhandler {
+    public:
+        void error(std::string const &message) const;
 
-  void badargument(const char ctx[]) const;
-};
+        void underflow(void) const;
+    };
+}
 
-#endif
+

@@ -1,16 +1,22 @@
+#include <memory>
 #include <cstdlib>
+
+#include "printerrorhandler.h"
+#include "errorhandler.h"
 #include "machine.h"
+#include "rpn.h"
 
 extern "C" int yyparse(void);
 
-Machine *machine;
+rpn::machine<rpn::machine_t> machine;
+
+std::unique_ptr<rpn::errorhandler> errorhandler;
 
 int main(int argc, char* argv[]) {
-  machine = new Machine();
 
-  while(yyparse() != 0);
+    errorhandler = std::make_unique<rpn::printerrorhandler>();
 
-  delete(machine);
+    while(yyparse() != 0);
 
-  return EXIT_SUCCESS;
+    ::exit(EXIT_SUCCESS);
 }
