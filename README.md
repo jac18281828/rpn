@@ -20,6 +20,8 @@ Supported operations.
 
 All operations pull parameters from the stack and repace with resuls.
 
+|command|description|
+|---|---|
 |abs|absolute value|
 |sqrt|square root|
 |cbrt|cube root|
