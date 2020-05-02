@@ -1,6 +1,6 @@
 #pragma once
 
 namespace rpn {
-    using machine_t = double;
+    using machine_t = float;
 }
 

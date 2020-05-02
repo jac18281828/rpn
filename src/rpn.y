@@ -31,7 +31,6 @@
       try {
           const rpn::bifun<machine_t, rpn::biop<machine_t>> bifun_eval;
           bifun_eval.eval(machine, op);
-          machine.print();
       } catch(rpn::underflow const &ex) {
           errorhandler.get()->underflow();
       } catch(std::exception const &ex) {
@@ -44,7 +43,6 @@
       try {      
           const rpn::ufun<machine_t, rpn::uop<machine_t>> ufun_eval;
           ufun_eval.eval(machine, op);
-          machine.print();
       } catch(rpn::underflow const &ex) {
           errorhandler.get()->underflow();
       } catch(std::exception const &ex) {
@@ -61,10 +59,11 @@
     int    token;
 }
 
+%token <sp>    SPACE;
 %token <str>   STRING;
 %token <value> NUMBER;
-%token <token> DROP DEPTH SWAP CLEAR ABS SQRT CBRT SQ EXP LN LOG ALOG ROOTX POW INV RAND SIN ASIN COS ACOS TAN ATAN NEG;
-%type  <value> exp;
+%token <token> DROP DEPTH SWAP CLEAR ABS SQRT CBRT SQ EXP LN LOG ALOG ROOTX POW INV RAND SIN ASIN COS ACOS TAN ATAN NEG PRINT;
+%type  <value> val;
 %type  <str>   lit;
 
 %%
@@ -72,42 +71,54 @@ multi_ops: operation
 | multi_ops operation
 ;
 
-operation: 
-exp '+' '\n' {
+operation:
+val sp {
+    machine.push($1);
+}
+| val '+' '\n' {
     machine.push($1);
     bieval(rpn::addop<machine_t>());
+    machine.print();
 }
-| exp '-' '\n' {
+| val '-' '\n' {
     machine.push($1);
     bieval(rpn::subop<machine_t>());
+    machine.print();
 }
-| exp '*' '\n' {
+| val '*' '\n' {
     machine.push($1);
-    bieval(rpn::mulop<machine_t>());    
+    bieval(rpn::mulop<machine_t>());
+    machine.print();
 }
-| exp '/' '\n' {
+| val '/' '\n' {
     machine.push($1);    
-    bieval(rpn::divop<machine_t>());        
+    bieval(rpn::divop<machine_t>());
+    machine.print();    
 }
-| exp '\n' {
+| val '\n' {
     machine.push($1);
     machine.print();
 }
 | lit '\n' {
     machine.push($1);
-    machine.print();
+    machine.print();    
 }
+| cmd sp { }
 | cmd '\n' {
     machine.print();
 }
 ;
 
-exp:     
+val:     
 NUMBER
 ;
 
 lit:
 STRING
+;
+
+sp:
+SPACE
 ;
 
 cmd:
@@ -138,4 +149,5 @@ cmd:
 | CLEAR   { machine.clear(); }
 | DEPTH   { machine.depth(); }
 | RAND    { machine.rand(); }
+| PRINT    { }
 ;

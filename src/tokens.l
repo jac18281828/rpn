@@ -5,14 +5,24 @@ extern "C" int yylex(void);
 %}
 
 %%
-[ \t] ;     /* ignore */
+[ \t] { return SPACE; };
 
-[0-9]+|([0-9]*\.[0-9]+)([eE][-+]?[0-9]+)     { 
+[0-9]+|([0-9]*\.[0-9]+)?([eE][-+]?[0-9]+)     { 
   yylval.value = atof(yytext); 
   return NUMBER; 
 };
 
 \"[^"]+\" { yylval.str = yytext; return STRING; };
+
+"e"  { 
+    yylval.value = 2.71828182845904523536;
+    return yylval.token = NUMBER; 
+}
+
+"pi"  { 
+    yylval.value = 3.1415926535897932384;
+    return yylval.token = NUMBER; 
+}
 
 "drop"  { return yylval.token = DROP; }
 "depth" { return yylval.token = DEPTH; }
@@ -37,9 +47,11 @@ extern "C" int yylex(void);
 "tan" { return yylval.token = TAN; }
 "atan" { return yylval.token = ATAN; }
 "neg" { return yylval.token = NEG; }
+"print" { return yylval.token = PRINT; }
 
 "$"     { return 0; /* EOF */ }
 
 \n         |
 .          return yytext[0];
+
 %%
