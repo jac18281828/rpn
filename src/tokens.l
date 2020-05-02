@@ -24,10 +24,12 @@ extern "C" int yylex(void);
 #include "rpn.hpp"
 %}
 
+%option caseless
+
 %%
 [ \t] { return SPACE; };
 
-[0-9]+|([0-9]*\.[0-9]+)?([eE][-+]?[0-9]+)     { 
+-?(([0-9]+)|([0-9]*\.[0-9]+)([eE][-+]?[0-9]+)?) { 
   yylval.value = atof(yytext); 
   return NUMBER; 
 };
@@ -68,10 +70,26 @@ extern "C" int yylex(void);
 "atan" { return yylval.token = ATAN; }
 "neg" { return yylval.token = NEG; }
 "print" { return yylval.token = PRINT; }
+"cosh" { return yylval.token = COSH; }
+"acosh" { return yylval.token = ACOSH; }
+"sinh" { return yylval.token = SINH; }
+"asinh" { return yylval.token = ASINH; }
+"tanh" { return yylval.token = TANH; }
+"atanh" { return yylval.token = ATANH; }
+"ceil" { return yylval.token = CEIL; }
+"floor" { return yylval.token = FLOOR; }
+"trunc" { return yylval.token = TRUNC; }
+"round" { return yylval.token = ROUND; }
+"mod" { return yylval.token = MOD; }
+"min" { return yylval.token = MIN; }
+"max" { return yylval.token = MAX; }
+"digits" { return yylval.token = DIGITS; }
 
 "$"     { return 0; /* EOF */ }
 
 \n         |
-.          return yytext[0];
+   [-+/*]          return yytext[0];
+   
+.       { /* ignore */ }
 
 %%

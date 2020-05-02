@@ -82,9 +82,9 @@
 %token <sp>    SPACE;
 %token <str>   STRING;
 %token <value> NUMBER;
-%token <token> DROP DEPTH SWAP CLEAR ABS SQRT CBRT SQ EXP LN LOG ALOG ROOTX POW INV RAND SIN ASIN COS ACOS TAN ATAN NEG PRINT;
 %type  <value> val;
 %type  <str>   lit;
+%token <token> DROP DEPTH SWAP CLEAR ABS SQRT CBRT SQ EXP LN LOG ALOG ROOTX POW INV RAND SIN ASIN COS ACOS TAN ATAN NEG PRINT COSH SINH TANH ACOSH ASINH ATANH MOD CEIL FLOOR TRUNC ROUND MIN MAX DIGITS;
 
 %%
 multi_ops: operation
@@ -164,10 +164,24 @@ cmd:
 | TAN   { ueval(rpn::tanop<machine_t>()); }
 | ATAN  { ueval(rpn::atanop<machine_t>()); }
 | NEG   { ueval(rpn::negop<machine_t>()); }
+| COSH   { ueval(rpn::coshop<machine_t>()); }
+| ACOSH   { ueval(rpn::acoshop<machine_t>()); }
+| SINH   { ueval(rpn::sinhop<machine_t>()); }
+| ASINH   { ueval(rpn::asinhop<machine_t>()); }
+| TANH   { ueval(rpn::tanhop<machine_t>()); }
+| ATANH   { ueval(rpn::atanhop<machine_t>()); }
+| CEIL   { ueval(rpn::ceilop<machine_t>()); }
+| FLOOR   { ueval(rpn::floorop<machine_t>()); }
+| TRUNC   { ueval(rpn::truncop<machine_t>()); }
+| ROUND   { ueval(rpn::roundop<machine_t>()); }
+| MOD   { bieval(rpn::modop<machine_t>()); }
+| MIN   { bieval(rpn::minop<machine_t>()); }
+| MAX   { bieval(rpn::maxop<machine_t>()); }
 | DROP    { machine.drop(); }
 | SWAP    { machine.swap(); }
 | CLEAR   { machine.clear(); }
 | DEPTH   { machine.depth(); }
 | RAND    { machine.rand(); }
+| DIGITS    { machine.digits(); }
 | PRINT    { }
 ;

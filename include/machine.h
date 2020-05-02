@@ -52,7 +52,7 @@ namespace rpn {
         void push(const D p) {
             rpn.push(p);
         }
-
+        
         void push(std::string const &s) {
             rpn.push(s);
         }
@@ -118,6 +118,14 @@ namespace rpn {
                     },
                     var );
             }
+        }
+
+        void digits() {
+            const auto depth = std::get<value_type>(pop());
+
+            const auto d = static_cast<int>(depth);
+            
+            std::cout.precision(d);
         }
 
     };

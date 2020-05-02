@@ -56,3 +56,27 @@ TEST_CASE("pow test", "[powop]") {
 
 }
 
+TEST_CASE("mod test", "[modop]") {
+
+    rpn::modop<double> mod;
+
+    REQUIRE(mod.eval(9.0, 7.0) == Approx(2.0F).epsilon(1e-8F));
+
+}
+
+TEST_CASE("min test", "[minop]") {
+
+    rpn::minop<double> min;
+
+    REQUIRE(min.eval(8.0, 100.0) == Approx(8.0F).epsilon(1e-8F));
+
+}
+
+TEST_CASE("max test", "[maxop]") {
+
+    rpn::maxop<double> max;
+
+    REQUIRE(max.eval(8.0, 100.0) == Approx(100.0F).epsilon(1e-8F));
+
+}
+

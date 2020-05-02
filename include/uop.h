@@ -158,4 +158,85 @@ namespace rpn {
         }
     };
 
+    template <typename D>
+    class coshop : public uop<D> {
+    public:
+        virtual D eval(const D d) const {
+            return ::cosh(d);
+        }
+    };
+
+    template <typename D>
+    class acoshop : public uop<D> {
+    public:
+        virtual D eval(const D d) const {
+            return ::acosh(d);
+        }
+    };
+
+    template <typename D>
+    class sinhop : public uop<D> {
+    public:
+        virtual D eval(const D d) const {
+            return ::sinh(d);
+        }
+    };
+
+    template <typename D>
+    class asinhop : public uop<D> {
+    public:
+        virtual D eval(const D d) const {
+            return ::asinh(d);
+        }
+    };
+
+    template <typename D>
+    class tanhop : public uop<D> {
+    public:
+        virtual D eval(const D d) const {
+            return ::tanh(d);
+        }
+    };
+    
+    template <typename D>
+    class atanhop : public uop<D> {
+    public:
+        virtual D eval(const D d) const {
+            return ::atanh(d);
+        }
+    };
+        
+    template <typename D>
+    class ceilop : public uop<D> {
+    public:
+        virtual D eval(const D d) const {
+            return ::ceil(d);
+        }
+    };
+
+    template <typename D>
+    class floorop : public uop<D> {
+    public:
+        virtual D eval(const D d) const {
+            return ::floor(d);
+        }
+    };
+    
+    template <typename D>
+    class truncop : public uop<D> {
+    public:
+        virtual D eval(const D d) const {
+            return ::trunc(d);
+        }
+    };
+
+    template <typename D>
+    class roundop : public uop<D> {
+    public:
+        virtual D eval(const D d) const {
+            return ::round(d);
+        }
+    };
+
+    
 }

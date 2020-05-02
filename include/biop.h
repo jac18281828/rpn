@@ -77,5 +77,29 @@ namespace rpn {
             return ::pow(d1, d2);
         }
     };
+
+    template <typename D>
+    class modop : public biop<D> {
+    public:
+        virtual D eval(const D d1, const D d2) const {
+            return ::remainder(d1, d2);
+        }
+    };
+
+    template <typename D>
+    class minop : public biop<D> {
+    public:
+        virtual D eval(const D d1, const D d2) const {
+            return ::fmin(d1, d2);
+        }
+    };
+
+    template <typename D>
+    class maxop : public biop<D> {
+    public:
+        virtual D eval(const D d1, const D d2) const {
+            return ::fmax(d1, d2);
+        }
+    };
     
 }

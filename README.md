@@ -15,6 +15,8 @@ Supported commands
 |depth| push depth of stack onto stack, stack size is 1+previous size|
 |swap| transpose the top two elements on the stack |
 |clear| clear the entire contents of the stack |
+|print|print the current top of stack|
+|digits|configure the output to display the specified number of digits|
 
 Supported operations.
 
@@ -34,11 +36,25 @@ All operations pull parameters from the stack and repace with resuls.
 |pow|x to the y|
 |inv|1/x|
 |rand|push a random number on the stack|
-|sin|sin|
-|asin|arcsin|
-|cos|cos|
-|acos|arccos|
-|tan|tan|
-|atan|arctan|
+|sin|sine|
+|asin|arcsine|
+|cos|cosine|
+|acos|arccose|
+|tan|tangent|
+|atan|arctangent|
 |neg|-x|
+|cosh|hyperbolic cosine|
+|acosh|hyperbolic arccosine|
+|sinh|hyperbolic sine|
+|asinh|hyperbolic arcsine|
+|tanh|hyperbolic tangent|
+|atanh|hyperbolic tangent|
+|ciel|integer part rounding up|
+|floor|integer part rounding down|
+|trunc|integer part rounding toward zero|
+|round|round up if .5 or larger, down otherwise|
+|mod|return any remainder resulting from dividing the two arguments|
+|min|return the least of the two entries at the top of the stack|
+|max|return the greater of the two entries at the top of the stack|
+
 

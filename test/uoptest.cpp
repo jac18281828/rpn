@@ -175,3 +175,132 @@ TEST_CASE("negop test", "[negop]") {
 }
 
 
+TEST_CASE("coshop test", "[coshop]") {
+
+    rpn::coshop<float> cosh;
+
+    const auto result = Approx(1.0F).epsilon(1e-8F);
+
+    REQUIRE(cosh.eval(0.0F) == result);
+
+    const auto result1 = Approx(1.54308063481524377847F).epsilon(1e-7F);
+
+    REQUIRE(cosh.eval(0.0F) == result);
+
+}
+
+TEST_CASE("acoshop test", "[acoshop]") {
+
+    rpn::acoshop<float> acosh;
+
+    const auto result = Approx(0.0F).epsilon(1e-8F);
+
+    REQUIRE(acosh.eval(1.0F) == result);
+
+}
+
+TEST_CASE("sinhop test", "[sinhop]") {
+
+    rpn::sinhop<float> sinh;
+
+    const auto result = Approx(0.0F).epsilon(1e-8F);
+
+    REQUIRE(sinh.eval(0.0F) == result);
+
+    const auto result1 = Approx(1.175201193643801456882381850595600815155717981334095870229F).epsilon(1e-7);
+
+    REQUIRE(sinh.eval(1.0F) == result1);
+
+}
+
+
+TEST_CASE("asinhop test", "[asinhop]") {
+
+    rpn::asinhop<float> asinh;
+
+    const auto result = Approx(0.0F).epsilon(1e-8F);
+
+    REQUIRE(asinh.eval(0.0F) == result);
+
+    const auto result1 = Approx(1.0F).epsilon(1e-7);
+
+    REQUIRE(asinh.eval(1.175201193643801456882381850595600815155717981334095870229F) == result1);
+
+}
+
+TEST_CASE("tanhop test", "[tanhop]") {
+
+    rpn::tanhop<float> tanh;
+
+    const auto result = Approx(0.0F).epsilon(1e-8F);
+
+    REQUIRE(tanh.eval(0.0F) == result);
+
+    const auto result1 = Approx(0.761594155955764888119458282604793590412768597257936551596F).epsilon(1e-7);
+
+    REQUIRE(tanh.eval(1.0) == result1);
+
+}
+
+TEST_CASE("atanhop test", "[atanhop]") {
+
+    rpn::atanhop<float> atanh;
+
+    const auto result = Approx(0.0F).epsilon(1e-8F);
+
+    REQUIRE(atanh.eval(0.0F) == result);
+
+    const auto result1 = Approx(1.0F).epsilon(1e-7);
+
+    REQUIRE(atanh.eval(0.761594155955764888119458282604793590412768597257936551596F) == result1);
+
+}
+
+TEST_CASE("ceilop test", "[ceilop]") {
+
+    rpn::ceilop<float> ceil;
+
+    REQUIRE(ceil.eval(0.0F) == Approx(0.0F).epsilon(1e-8F));
+
+    REQUIRE(ceil.eval(1.1F) == Approx(2.0F).epsilon(1e-8F));
+
+    REQUIRE(ceil.eval(0.8F) == Approx(1.0F).epsilon(1e-8F));
+
+}
+
+TEST_CASE("floorop test", "[floorop]") {
+
+    rpn::floorop<float> floor;
+
+    REQUIRE(floor.eval(0.0F) == Approx(0.0F).epsilon(1e-8F));
+
+    REQUIRE(floor.eval(1.1F) == Approx(1.0F).epsilon(1e-8F));
+
+    REQUIRE(floor.eval(0.8F) == Approx(0.0F).epsilon(1e-8F));
+
+}
+
+TEST_CASE("truncop test", "[truncop]") {
+
+    rpn::truncop<float> trunc;
+
+    REQUIRE(trunc.eval(0.0F) == Approx(0.0F).epsilon(1e-8F));
+
+    REQUIRE(trunc.eval(-0.1F) == Approx(0.0F).epsilon(1e-8F));
+
+    REQUIRE(trunc.eval(0.8F) == Approx(0.0F).epsilon(1e-8F));
+
+}
+
+TEST_CASE("roundop test", "[roundop]") {
+
+    rpn::roundop<float> round;
+
+    REQUIRE(round.eval(0.5F) == Approx(1.0F).epsilon(1e-8F));
+
+    REQUIRE(round.eval(0.4F) == Approx(0.0F).epsilon(1e-8F));
+
+}
+
+
+
