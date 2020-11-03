@@ -17,7 +17,7 @@
 
 cmake_minimum_required(VERSION 3.5)
 
-#set(CMAKE_VERBOSE_MAKEFILE on)
+set(CMAKE_VERBOSE_MAKEFILE on)
 
 set(MAJOR 1)
 set(VERSION ${MAJOR}.0.1)
